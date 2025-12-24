@@ -12,27 +12,30 @@ logger = logging.getLogger(__name__)
 MAX_CONCURRENCY = 10
 semaphore = asyncio.Semaphore(MAX_CONCURRENCY)
 
-async def check_email(target_email, from_email, hello_name, check_gravatar, hibp_api_key):
+async def check_email(target_email, from_email, hello_name, check_gravatar, hibp_api_key, proxy_url, smtp_timeout):
     async with semaphore:
         logger.info(f"Checking email: {target_email}")
         
         # Prepare command
-        # Note: reacher-cli expects values for its boolean flags due to parse(try_from_str)
         cmd = [
             "reacher-cli",
             "--from-email", from_email,
             "--hello-name", hello_name,
             "--check-gravatar", "true" if check_gravatar else "false",
+            "--smtp-timeout", str(smtp_timeout),
         ]
         
         if hibp_api_key:
             cmd.extend(["--haveibeenpwned-api-key", hibp_api_key])
             
+        if proxy_url:
+            cmd.extend(["--proxy", proxy_url])
+            
         cmd.append(target_email)
         
         try:
-            # Run the Rust binary with a timeout (e.g., 45 seconds per email)
-            # Headless checks (Yahoo/Outlook) can take 20-30 seconds.
+            # Run the Rust binary with a timeout
+            # We give it a bit more time than the internal SMTP timeout to account for DNS/startup
             process = await asyncio.create_subprocess_exec(
                 *cmd,
                 stdout=asyncio.subprocess.PIPE,
@@ -40,7 +43,8 @@ async def check_email(target_email, from_email, hello_name, check_gravatar, hibp
             )
             
             try:
-                stdout, stderr = await asyncio.wait_for(process.communicate(), timeout=45.0)
+                # asyncio timeout should be slightly larger than the internal Rust timeout
+                stdout, stderr = await asyncio.wait_for(process.communicate(), timeout=float(smtp_timeout) + 10.0)
                 
                 if process.returncode == 0:
                     try:
@@ -91,12 +95,14 @@ async def main():
         hello_name = actor_input.get("hello_name", "gmail.com")
         check_gravatar = actor_input.get("check_gravatar", False)
         hibp_api_key = actor_input.get("haveibeenpwned_api_key")
+        proxy_url = actor_input.get("proxy_url")
+        smtp_timeout = actor_input.get("smtp_timeout", 15)
         
         logger.info(f"Starting check for {len(to_check)} emails with concurrency {MAX_CONCURRENCY}.")
 
         # Run checks in parallel
         tasks = [
-            check_email(target_email, from_email, hello_name, check_gravatar, hibp_api_key)
+            check_email(target_email, from_email, hello_name, check_gravatar, hibp_api_key, proxy_url, smtp_timeout)
             for target_email in to_check
         ]
         

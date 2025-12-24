@@ -63,6 +63,10 @@ pub struct Cli {
 	#[clap(long, env, parse(try_from_str))]
 	pub haveibeenpwned_api_key: Option<String>,
 
+	/// The timeout for the SMTP request, in seconds.
+	#[clap(long, env, default_value = "15")]
+	pub smtp_timeout: u64,
+
 	/// The email to check.
 	pub to_email: String,
 }
@@ -91,7 +95,7 @@ async fn main() -> Result<(), anyhow::Error> {
 		CONF.hello_name.clone(),
 		CONF.from_email.clone(),
 		CONF.smtp_port,
-		None,
+		Some(Duration::from_secs(CONF.smtp_timeout)),
 		1,
 	);
 

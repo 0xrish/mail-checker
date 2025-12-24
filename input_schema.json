@@ -44,6 +44,20 @@
             "type": "string",
             "description": "Optional API key for HaveIBeenPwned to check for breaches.",
             "editor": "textfield"
+        },
+        "proxy_url": {
+            "title": "Proxy URL",
+            "type": "string",
+            "description": "Optional SOCKS5 proxy URL (e.g., socks5://user:pass@host:port).",
+            "editor": "textfield"
+        },
+        "smtp_timeout": {
+            "title": "SMTP Timeout (seconds)",
+            "type": "integer",
+            "description": "Timeout for each SMTP connection in seconds.",
+            "default": 15,
+            "minimum": 1,
+            "editor": "number"
         }
     }
 }
