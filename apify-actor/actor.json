@@ -1,0 +1,9 @@
+{
+    "actorSpecification": 1,
+    "name": "email-checker",
+    "title": "Email Checker (Rust + Python)",
+    "description": "A powerful email checker that validates email existence without sending any emails, powered by Reacher (Rust) and Apify (Python).",
+    "version": "0.1.0",
+    "dockerfile": "./Dockerfile",
+    "input": "./input_schema.json"
+}

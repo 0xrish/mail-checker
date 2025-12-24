@@ -1,0 +1,43 @@
+{
+    "title": "Email Checker Input",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "email": {
+            "title": "Single Email",
+            "type": "string",
+            "description": "A single email address to check.",
+            "editor": "textfield"
+        },
+        "emails": {
+            "title": "List of Emails",
+            "type": "array",
+            "description": "A list of email addresses to check.",
+            "editor": "stringList",
+            "items": {
+                "type": "string"
+            }
+        },
+        "from_email": {
+            "title": "From Email",
+            "type": "string",
+            "description": "The email to use in the MAIL FROM: SMTP command.",
+            "default": "reacher.email@gmail.com",
+            "editor": "textfield"
+        },
+        "hello_name": {
+            "title": "Hello Name",
+            "type": "string",
+            "description": "The name to use in the EHLO: SMTP command.",
+            "default": "gmail.com",
+            "editor": "textfield"
+        },
+        "check_gravatar": {
+            "title": "Check Gravatar",
+            "type": "boolean",
+            "description": "Whether to check if a gravatar image exists for the email.",
+            "default": false,
+            "editor": "checkbox"
+        }
+    }
+}
