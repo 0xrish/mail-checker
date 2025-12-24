@@ -17,7 +17,7 @@ anyhow = "1.0"
 async-recursion = "1.0.5"
 async-smtp = { version = "0.9.1", features = ["runtime-tokio"] }
 chrono = { version = "0.4.31", features = ["serde"] }
-config = "0.14"
+config = "0.15"
 derive_builder = "0.20"
 fast-socks5 = "0.9"
 fantoccini = { version = "0.21.2", default-features = false, features = [
