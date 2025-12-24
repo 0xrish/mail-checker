@@ -5,6 +5,8 @@ FROM rust:1.80-slim-bookworm AS builder
 RUN apt-get update && apt-get install -y \
     pkg-config \
     libssl-dev \
+    perl \
+    make \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /usr/src/reacher
