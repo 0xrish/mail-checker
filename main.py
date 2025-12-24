@@ -24,8 +24,9 @@ async def main():
             to_check.extend(emails)
             
         if not to_check:
-            logger.error("No emails provided in input.")
-            await Actor.fail(message="No emails provided in input.")
+            status_message = "No emails provided in input. Please provide 'email' or 'emails' in the input JSON."
+            logger.error(status_message)
+            await Actor.exit(exit_code=1, status_message=status_message)
             return
 
         # Optional configuration from input
