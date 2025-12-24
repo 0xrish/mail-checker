@@ -28,7 +28,7 @@ hickory-proto = "0.24.0"
 hickory-resolver = "0.24.0"
 levenshtein = "1.0.5"
 log = "0.4.26"
-mailchecker = "6.0.11"
+mailchecker = "6.0.19"
 md5 = "0.7.0"
 once_cell = "1.21.1"
 rand = { version = "0.8.5", features = ["small_rng"] }
