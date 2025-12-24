@@ -38,6 +38,12 @@
             "description": "Whether to check if a gravatar image exists for the email.",
             "default": false,
             "editor": "checkbox"
+        },
+        "haveibeenpwned_api_key": {
+            "title": "HaveIBeenPwned API Key",
+            "type": "string",
+            "description": "Optional API key for HaveIBeenPwned to check for breaches.",
+            "editor": "textfield"
         }
     }
 }
