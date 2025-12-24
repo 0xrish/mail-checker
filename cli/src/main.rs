@@ -19,6 +19,7 @@ use check_if_email_exists::{
 };
 use clap::Parser;
 use once_cell::sync::Lazy;
+use std::time::Duration;
 
 /// CLI options of this binary.
 #[derive(Parser, Debug)]
