@@ -35,10 +35,11 @@ RUN chmod +x /usr/local/bin/reacher-cli
 WORKDIR /app
 
 # Copy Python actor code
-COPY apify-actor/requirements.txt ./
+COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY apify-actor/ .
+# Copy the rest of the files (including main.py, start.sh, etc.)
+COPY . .
 RUN chmod +x start.sh
 
 # Set environment variables
