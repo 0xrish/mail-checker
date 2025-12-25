@@ -70,4 +70,3 @@ The Actor provides a detailed JSON object for every email checked:
 This Actor does not store any of the emails you process. All checks are performed in real-time and results are stored only in your private Apify Dataset.
 
 ---
-*Powered by Reacher Engine & Apify Python SDK.*
