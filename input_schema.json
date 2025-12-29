@@ -8,8 +8,7 @@
             "type": "string",
             "description": "A single email address to check.",
             "editor": "textfield",
-            "default": "xyz.mikolabs@gmail.com",
-            "examples": ["xyz.mikolabs@gmail.com"]
+            "default": "xyz.mikolabs@gmail.com"
         },
         "emails": {
             "title": "List of Emails",
