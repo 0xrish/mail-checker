@@ -7,7 +7,9 @@
             "title": "Single Email",
             "type": "string",
             "description": "A single email address to check.",
-            "editor": "textfield"
+            "editor": "textfield",
+            "default": "xyz.mikolabs@gmail.com",
+            "examples": ["xyz.mikolabs@gmail.com"]
         },
         "emails": {
             "title": "List of Emails",
